@@ -1,1 +1,8 @@
 # pytorch-lightning-imdb-bert
+Showcasing the various features of Pytorch Lightning in training a Deep Learning model.  How Pytorch Lightning makes it simple to write the training and testing code plus easy to use GPU without having to worry about loading the model and data to Cuda using the pytorch .cuda function.  Pytorch Lightning also gives access to a lot of different Loggers - this code logs the results to TensorBoard logger but can use MLFlow or Neptune easily.  
+
+The example used is the IMDB reviews dataset.  The Pytorch dataset is created from the raw data - not from Pytorch datasets or Transformer datasets.  In Real life, the Pytorch dataset needs to be created from the raw data.  The Bert tokenizer is used to tokenize the text.  A classification head is written on top of the base DistilBert Model - again to show the way to write the forward network code as deemed necessary.  Transformer website has a BertSequenceClassification model that already has the classification head in it but it is better to write one on your own.  A cyclic learning rate scheduler is used to change the learning rates.  
+
+The notebook script is written in a way to be able to easily run it as a python script.  Pytorch Lightning does not allow the use of multi GPUs within a Jupyter notebook environment. The code has to be run as a Python script to use multi gpus - multi gpu reference is specified as arguments when running the python script.
+
+The training code achieves a Test accuracy of 0.9238 in one epoch on the IMDB data - this is a very respectable accuracy in one epoch.  This is only possible because of the usage of the Cyclical learning rate - a constant learning rate during the epoch would have given much less accuracy.
